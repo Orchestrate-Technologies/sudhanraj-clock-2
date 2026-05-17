@@ -48,7 +48,11 @@ export function ClockDisplay() {
       >
         {formatTodayDate(now)}
       </time>
-      <p className="timezone-line" aria-label="Time zone">
+      <p
+        className="timezone-line"
+        aria-label="Time zone"
+        suppressHydrationWarning
+      >
         {formatTimeZoneLabel(now)}
       </p>
       <div className="control-stack" aria-label="Clock preferences">
