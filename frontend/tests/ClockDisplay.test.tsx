@@ -1,6 +1,7 @@
 import { act, cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ClockDisplay } from "@/components/ClockDisplay";
+import { formatTimeZoneLabel } from "@/lib/clock";
 
 describe("ClockDisplay", () => {
   afterEach(() => {
@@ -19,9 +20,16 @@ describe("ClockDisplay", () => {
       "dateTime",
       "2026-05-17"
     );
+    expect(screen.getByLabelText("Time zone")).toHaveTextContent(
+      formatTimeZoneLabel(new Date("2026-05-17T13:05:09"))
+    );
     expect(
       screen.getByRole("button", { name: "12-hour" })
     ).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: "Light" })).toHaveAttribute(
+      "aria-pressed",
+      "true"
+    );
   });
 
   it("updates the displayed time every second", () => {
@@ -63,5 +71,33 @@ describe("ClockDisplay", () => {
     expect(screen.getByText("1:05:09 PM")).toBeInTheDocument();
     expect(twelveHourButton).toHaveAttribute("aria-pressed", "true");
     expect(twentyFourHourButton).toHaveAttribute("aria-pressed", "false");
+  });
+
+  it("toggles between light and dark themes", () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-05-17T13:05:09"));
+
+    render(<ClockDisplay />);
+
+    const lightButton = screen.getByRole("button", { name: "Light" });
+    const darkButton = screen.getByRole("button", { name: "Dark" });
+
+    expect(document.documentElement).toHaveAttribute("data-theme", "light");
+
+    act(() => {
+      darkButton.click();
+    });
+
+    expect(document.documentElement).toHaveAttribute("data-theme", "dark");
+    expect(lightButton).toHaveAttribute("aria-pressed", "false");
+    expect(darkButton).toHaveAttribute("aria-pressed", "true");
+
+    act(() => {
+      lightButton.click();
+    });
+
+    expect(document.documentElement).toHaveAttribute("data-theme", "light");
+    expect(lightButton).toHaveAttribute("aria-pressed", "true");
+    expect(darkButton).toHaveAttribute("aria-pressed", "false");
   });
 });

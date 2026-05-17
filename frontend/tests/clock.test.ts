@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   formatClockTime,
   formatLocalDateAttribute,
+  formatTimeZoneLabel,
   formatTodayDate
 } from "@/lib/clock";
 
@@ -18,6 +19,12 @@ describe("clock formatting", () => {
 
   it("formats today's date with weekday, month, day, and year", () => {
     expect(formatTodayDate(sample)).toBe("Sunday, May 17, 2026");
+  });
+
+  it("formats a timezone label with its current offset", () => {
+    expect(formatTimeZoneLabel(sample, "Asia/Singapore")).toBe(
+      "Asia/Singapore (GMT+8)"
+    );
   });
 
   it("formats the semantic date from the local calendar day", () => {
