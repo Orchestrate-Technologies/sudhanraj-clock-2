@@ -156,9 +156,9 @@ design:
   fidelity: loose-inspiration
 # BEGIN FORGE BUILD SEQUENCE
 linear_build_sequence:
-  sequence_id: c98b9d1d-739f-4d69-bafd-e6b849ec945a
+  sequence_id: 1e684e92-4436-4b4b-a064-588706f45823
   status: planned
-  updated_at: 2026-05-17T03:23:06.354Z
+  updated_at: 2026-05-17T04:57:50.230Z
   issues:
     - order: 1
       linear_issue_id: ORC-250
@@ -166,13 +166,13 @@ linear_build_sequence:
       release: R1
       title: "Display current time"
     - order: 2
-      linear_issue_id: ORC-252
-      story_id: linear_clock-2_7ca186d1-cacd-4103-af03-7060c891caa7
-      release: R1
-      title: "Show today's date"
-    - order: 3
       linear_issue_id: ORC-251
       story_id: linear_clock-2_55059695-f9dd-407a-af94-5d86bfb8496e
       release: R1
       title: "Toggle 12-hour and 24-hour format"
+    - order: 3
+      linear_issue_id: ORC-252
+      story_id: linear_clock-2_7ca186d1-cacd-4103-af03-7060c891caa7
+      release: R1
+      title: "Show today's date"
 # END FORGE BUILD SEQUENCE
