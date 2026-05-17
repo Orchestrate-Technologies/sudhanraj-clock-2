@@ -1,0 +1,195 @@
+project:
+  id: clock-2
+  name: clock-2
+  description: "A frontend clock web app showing current time, date, timezone, display preferences, and persisted preferences."
+  type: frontend
+  structure: monorepo
+  repository: sudhanraj/clock-2
+
+runtime:
+  primary: node
+  package_manager: pnpm
+
+frontend:
+  enabled: true
+  framework: nextjs
+
+backend:
+  enabled: false
+  framework: none
+
+database:
+  enabled: false
+  engine: none
+  name: null
+
+infrastructure:
+  profile: aws-serverless-cloudformation
+  default_profile: aws
+  aws_profile: null
+  aws_region: null
+  notes:
+    - "Frontend deployments should use S3 and CloudFront if deployment is enabled later."
+    - "AWS profile and region are intentionally unset until deployment work is requested."
+
+release:
+  policy: PR-ONLY
+  provider: github
+  base_branch: main
+  branch_prefix: release/
+  branch_format: "R{release_number}-{release_title_slug}"
+  tag_format: "v{release_number}.{deployment_number}"
+  pr_draft_until_release_tested: true
+  release_label_pattern: "R{number}"
+
+deployment:
+  mode: none
+  require_merge_to_base_before_deploy: false
+  deployed_verification_required: false
+  deployed_url: null
+
+orchestration:
+  mode: coordinator-with-worker-sessions
+  worker_session_scope: per-issue
+  parallel_implementation: false
+  parallel_review: true
+  require_isolated_worktree_for_parallel_writes: true
+
+quality:
+  self_review_required: true
+  independent_review_required: true
+  static_checks_required: true
+  security_review_required: true
+  dependency_review_required: true
+
+linear:
+  project: Clock 2
+  releases:
+    - label: R1
+      title: clock-display-foundation
+      parent_epic_ids: []
+      parent_epic_chain: []
+      parent_epic_titles: {}
+      issue_ids:
+        - ORC-250
+        - ORC-252
+        - ORC-251
+      sequence_document_url: null
+    - label: R2
+      title: presentation-preferences
+      parent_epic_ids: []
+      parent_epic_chain: []
+      parent_epic_titles: {}
+      issue_ids:
+        - ORC-253
+        - ORC-254
+      sequence_document_url: null
+    - label: R3
+      title: preference-persistence
+      parent_epic_ids: []
+      parent_epic_chain: []
+      parent_epic_titles: {}
+      issue_ids:
+        - ORC-255
+        - ORC-256
+      sequence_document_url: null
+  flagged_tickets:
+    - id: ORC-259
+      title: "Fix the alarm bug"
+      reason: "NON-DAEDALUS FORMAT"
+      action: skipped
+    - id: ORC-258
+      title: "CLK-009 — Play hourly chime"
+      reason: "MISSING REQUIRED SECTION · STATES"
+      action: skipped
+    - id: ORC-257
+      title: "CLK-008 — Set alarm at specific time"
+      reason: "MISSING RELEASE LABEL"
+      action: skipped
+  statuses:
+    backlog: Backlog
+    todo: Todo
+    blocked: Blocked
+    in_progress: In Progress
+    in_review: In Review
+    build_complete: Build Complete
+    pr_open: PR Open
+    deployed: Deployed
+    deployed_tested: Deployed & Tested
+    canceled: Canceled
+    duplicate: Duplicate
+  blocker_satisfied_statuses:
+    per_release:
+      - Build Complete
+      - PR Open
+      - Deployed
+      - Deployed & Tested
+    per_ticket:
+      - PR Open
+      - Deployed
+      - Deployed & Tested
+  selection:
+    ready_status: Todo
+    working_status: In Progress
+    blocked_status: Blocked
+    local_complete_status: Build Complete
+    release_label_pattern: "R{number}"
+    priority_order:
+      - Urgent
+      - High
+      - Medium
+      - Low
+
+testing:
+  local_required: true
+  acceptance_criteria_required: true
+  browser_tool: playwright
+  deployed_verification_required: false
+  commands:
+    - pnpm lint
+    - pnpm test
+  build_commands:
+    - pnpm build
+  notes:
+    - "No package scripts exist yet; create these commands when the frontend app is scaffolded."
+
+design:
+  reference: null
+  fidelity: loose-inspiration
+# BEGIN FORGE BUILD SEQUENCE
+linear_build_sequence:
+  sequence_id: c98b9d1d-739f-4d69-bafd-e6b849ec945a
+  status: planned
+  updated_at: 2026-05-17T03:23:06.354Z
+  issues:
+    - order: 1
+      linear_issue_id: ORC-250
+      story_id: linear_clock-2_a68b4183-6507-4d86-80b9-f5390b9b6276
+      release: R1
+      title: "Display current time"
+    - order: 2
+      linear_issue_id: ORC-251
+      story_id: linear_clock-2_55059695-f9dd-407a-af94-5d86bfb8496e
+      release: R1
+      title: "Toggle 12-hour and 24-hour format"
+    - order: 3
+      linear_issue_id: ORC-252
+      story_id: linear_clock-2_7ca186d1-cacd-4103-af03-7060c891caa7
+      release: R1
+      title: "Show today's date"
+    - order: 4
+      linear_issue_id: ORC-253
+      story_id: linear_clock-2_1e0964bc-6f79-4074-9b9d-e7d1750def98
+      release: R2
+      title: "Dark and light theme toggle"
+    - order: 5
+      linear_issue_id: ORC-254
+      story_id: linear_clock-2_a0afb778-8e24-4299-bbf5-e9067e22662f
+      release: R2
+      title: "Show timezone label"
+    - order: 6
+      linear_issue_id: ORC-255
+      story_id: linear_clock-2_3406d3a0-11c8-466d-b947-fd004e430137
+      release: R3
+      title: "Persist preferences to localStorage"
+# END FORGE BUILD SEQUENCE
