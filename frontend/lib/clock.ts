@@ -32,6 +32,22 @@ export function formatTodayDate(date: Date) {
   return todayDateFormatter.format(date);
 }
 
+export function formatTimeZoneLabel(
+  date: Date,
+  timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+) {
+  const timeZoneNameFormatter = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    timeZoneName: "shortOffset"
+  });
+  const timeZoneName = timeZoneNameFormatter
+    .formatToParts(date)
+    .find((part) => part.type === "timeZoneName")?.value;
+  const displayName = timeZone.replaceAll("_", " ");
+
+  return timeZoneName ? `${displayName} (${timeZoneName})` : displayName;
+}
+
 export function formatLocalDateAttribute(date: Date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");

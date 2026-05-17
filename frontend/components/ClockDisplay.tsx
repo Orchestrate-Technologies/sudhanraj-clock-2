@@ -5,6 +5,7 @@ import {
   ClockFormat,
   formatClockTime,
   formatLocalDateAttribute,
+  formatTimeZoneLabel,
   formatTodayDate
 } from "@/lib/clock";
 
@@ -47,6 +48,9 @@ export function ClockDisplay() {
       >
         {formatTodayDate(now)}
       </time>
+      <p className="timezone-line" aria-label="Time zone">
+        {formatTimeZoneLabel(now)}
+      </p>
       <div className="control-stack" aria-label="Clock preferences">
         <div
           className="toggle-group"

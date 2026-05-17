@@ -1,6 +1,7 @@
 import { act, cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ClockDisplay } from "@/components/ClockDisplay";
+import { formatTimeZoneLabel } from "@/lib/clock";
 
 describe("ClockDisplay", () => {
   afterEach(() => {
@@ -18,6 +19,9 @@ describe("ClockDisplay", () => {
     expect(screen.getByText("Sunday, May 17, 2026")).toHaveAttribute(
       "dateTime",
       "2026-05-17"
+    );
+    expect(screen.getByLabelText("Time zone")).toHaveTextContent(
+      formatTimeZoneLabel(new Date("2026-05-17T13:05:09"))
     );
     expect(
       screen.getByRole("button", { name: "12-hour" })
