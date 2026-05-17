@@ -13,6 +13,16 @@ runtime:
 frontend:
   enabled: true
   framework: nextjs
+  app_root: frontend
+  package_manager: pnpm
+  install_command: pnpm install --frozen-lockfile
+  build_command: pnpm build
+  test_commands:
+    - pnpm lint
+    - pnpm test
+  notes:
+    - "Deployable frontend source, package.json, lockfiles, tests, and build config live under frontend/."
+    - "Do not scaffold frontend app files at the repository root unless frontend.app_root is explicitly changed."
 
 backend:
   enabled: false
@@ -29,8 +39,8 @@ infrastructure:
   aws_profile: null
   aws_region: null
   notes:
-    - "Frontend deployments should use S3 and CloudFront if deployment is enabled later."
-    - "AWS profile and region are intentionally unset until deployment work is requested."
+    - "Frontend deployments are managed by Forge through AWS Amplify using frontend/ as the app root."
+    - "AWS profile and region are supplied by Forge environment configuration and are not stored in this project config."
 
 release:
   policy: PR-ONLY
@@ -43,10 +53,18 @@ release:
   release_label_pattern: "R{number}"
 
 deployment:
-  mode: none
+  mode: per-release
+  provider: amplify
+  frontend_app_root: frontend
+  production_branch: main
+  branch_prefix: release/
   require_merge_to_base_before_deploy: false
-  deployed_verification_required: false
+  deployed_verification_required: true
   deployed_url: null
+  notes:
+    - "The main branch is the production Amplify branch when production deployment is enabled."
+    - "Each release branch gets its own Amplify branch preview URL."
+    - "Forge should run Amplify builds from frontend/ and must not deploy root-level placeholder content."
 
 orchestration:
   mode: coordinator-with-worker-sessions
@@ -142,14 +160,14 @@ testing:
   local_required: true
   acceptance_criteria_required: true
   browser_tool: playwright
-  deployed_verification_required: false
+  deployed_verification_required: true
   commands:
-    - pnpm lint
-    - pnpm test
+    - cd frontend && pnpm lint
+    - cd frontend && pnpm test
   build_commands:
-    - pnpm build
+    - cd frontend && pnpm build
   notes:
-    - "No package scripts exist yet; create these commands when the frontend app is scaffolded."
+    - "Run frontend checks from frontend/."
 
 design:
   reference: null
