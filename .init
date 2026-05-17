@@ -156,23 +156,23 @@ design:
   fidelity: loose-inspiration
 # BEGIN FORGE BUILD SEQUENCE
 linear_build_sequence:
-  sequence_id: 1e684e92-4436-4b4b-a064-588706f45823
+  sequence_id: e5828bfc-251a-4d59-9b4d-ccf8d7c91ebe
   status: planned
-  updated_at: 2026-05-17T04:57:50.230Z
+  updated_at: 2026-05-17T11:49:05.760Z
   issues:
     - order: 1
-      linear_issue_id: ORC-250
-      story_id: linear_clock-2_a68b4183-6507-4d86-80b9-f5390b9b6276
-      release: R1
-      title: "Display current time"
+      linear_issue_id: ORC-253
+      story_id: linear_clock-2_1e0964bc-6f79-4074-9b9d-e7d1750def98
+      release: R2
+      title: "Dark and light theme toggle"
     - order: 2
-      linear_issue_id: ORC-251
-      story_id: linear_clock-2_55059695-f9dd-407a-af94-5d86bfb8496e
-      release: R1
-      title: "Toggle 12-hour and 24-hour format"
+      linear_issue_id: ORC-254
+      story_id: linear_clock-2_a0afb778-8e24-4299-bbf5-e9067e22662f
+      release: R2
+      title: "Show timezone label"
     - order: 3
-      linear_issue_id: ORC-252
-      story_id: linear_clock-2_7ca186d1-cacd-4103-af03-7060c891caa7
-      release: R1
-      title: "Show today's date"
+      linear_issue_id: ORC-255
+      story_id: linear_clock-2_3406d3a0-11c8-466d-b947-fd004e430137
+      release: R3
+      title: "Persist preferences to localStorage"
 # END FORGE BUILD SEQUENCE
