@@ -9,6 +9,23 @@
   --accent-strong: #144c48;
   --accent-contrast: #ffffff;
   --shadow: rgba(38, 34, 26, 0.12);
+  --glow: rgba(31, 111, 104, 0.16);
+  --toggle-surface: #ece6d8;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #101318;
+  --foreground: #f4f0e8;
+  --muted: #adb5c2;
+  --panel: #181d24;
+  --line: #313946;
+  --accent: #76d1c7;
+  --accent-strong: #9be2da;
+  --accent-contrast: #0d1718;
+  --shadow: rgba(0, 0, 0, 0.34);
+  --glow: rgba(118, 209, 199, 0.18);
+  --toggle-surface: #232a34;
 }
 
 * {
@@ -23,7 +40,7 @@ body {
 body {
   margin: 0;
   background:
-    linear-gradient(160deg, rgba(31, 111, 104, 0.16), transparent 42%),
+    linear-gradient(160deg, var(--glow), transparent 42%),
     var(--background);
   color: var(--foreground);
   font-family:
@@ -84,18 +101,24 @@ button {
   text-align: center;
 }
 
-.format-toggle {
+.control-stack {
+  display: grid;
+  width: min(100%, 420px);
+  gap: 12px;
+}
+
+.toggle-group {
   display: grid;
   grid-template-columns: repeat(2, minmax(96px, 1fr));
-  width: min(100%, 260px);
+  width: 100%;
   gap: 4px;
   padding: 4px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #ece6d8;
+  background: var(--toggle-surface);
 }
 
-.format-option {
+.toggle-option {
   min-width: 0;
   min-height: 42px;
   border: 0;
@@ -112,19 +135,19 @@ button {
     box-shadow 140ms ease;
 }
 
-.format-option:hover {
+.toggle-option:hover {
   color: var(--foreground);
 }
 
-.format-option:focus-visible {
+.toggle-option:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--accent) 34%, transparent);
   outline-offset: 2px;
 }
 
-.format-option[aria-pressed="true"] {
+.toggle-option[aria-pressed="true"] {
   background: var(--accent);
   color: var(--accent-contrast);
-  box-shadow: 0 6px 18px rgba(20, 76, 72, 0.2);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent-strong) 24%, transparent);
 }
 
 @media (min-width: 360px) {
@@ -164,6 +187,10 @@ button {
 
   .date-line {
     font-size: 1.2rem;
+  }
+
+  .control-stack {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
