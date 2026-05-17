@@ -1,7 +1,7 @@
 project:
   id: clock-2
   name: clock-2
-  description: "A frontend clock web app showing current time, date, timezone, display preferences, and persisted preferences."
+  description: "A frontend clock web app showing the current time, today's date, and a 12-hour or 24-hour display preference."
   type: frontend
   structure: monorepo
   repository: sudhanraj/clock-2
@@ -75,36 +75,34 @@ linear:
         - ORC-252
         - ORC-251
       sequence_document_url: null
-    - label: R2
-      title: presentation-preferences
-      parent_epic_ids: []
-      parent_epic_chain: []
-      parent_epic_titles: {}
-      issue_ids:
-        - ORC-253
-        - ORC-254
-      sequence_document_url: null
-    - label: R3
-      title: preference-persistence
-      parent_epic_ids: []
-      parent_epic_chain: []
-      parent_epic_titles: {}
-      issue_ids:
-        - ORC-255
-        - ORC-256
-      sequence_document_url: null
   flagged_tickets:
     - id: ORC-259
       title: "Fix the alarm bug"
-      reason: "NON-DAEDALUS FORMAT"
+      reason: "NOT TODO · Backlog"
       action: skipped
     - id: ORC-258
       title: "CLK-009 — Play hourly chime"
-      reason: "MISSING REQUIRED SECTION · STATES"
+      reason: "NOT TODO · Backlog"
       action: skipped
     - id: ORC-257
       title: "CLK-008 — Set alarm at specific time"
       reason: "MISSING RELEASE LABEL"
+      action: skipped
+    - id: ORC-256
+      title: "CLK-007 — Sync preferences across devices (BLOCKED)"
+      reason: "NOT TODO · Backlog"
+      action: skipped
+    - id: ORC-255
+      title: "CLK-006 — Persist preferences to localStorage"
+      reason: "NOT TODO · Backlog"
+      action: skipped
+    - id: ORC-254
+      title: "CLK-005 — Show timezone label"
+      reason: "NOT TODO · Backlog"
+      action: skipped
+    - id: ORC-253
+      title: "CLK-004 — Dark and light theme toggle"
+      reason: "NOT TODO · Backlog"
       action: skipped
   statuses:
     backlog: Backlog
@@ -168,28 +166,13 @@ linear_build_sequence:
       release: R1
       title: "Display current time"
     - order: 2
-      linear_issue_id: ORC-251
-      story_id: linear_clock-2_55059695-f9dd-407a-af94-5d86bfb8496e
-      release: R1
-      title: "Toggle 12-hour and 24-hour format"
-    - order: 3
       linear_issue_id: ORC-252
       story_id: linear_clock-2_7ca186d1-cacd-4103-af03-7060c891caa7
       release: R1
       title: "Show today's date"
-    - order: 4
-      linear_issue_id: ORC-253
-      story_id: linear_clock-2_1e0964bc-6f79-4074-9b9d-e7d1750def98
-      release: R2
-      title: "Dark and light theme toggle"
-    - order: 5
-      linear_issue_id: ORC-254
-      story_id: linear_clock-2_a0afb778-8e24-4299-bbf5-e9067e22662f
-      release: R2
-      title: "Show timezone label"
-    - order: 6
-      linear_issue_id: ORC-255
-      story_id: linear_clock-2_3406d3a0-11c8-466d-b947-fd004e430137
-      release: R3
-      title: "Persist preferences to localStorage"
+    - order: 3
+      linear_issue_id: ORC-251
+      story_id: linear_clock-2_55059695-f9dd-407a-af94-5d86bfb8496e
+      release: R1
+      title: "Toggle 12-hour and 24-hour format"
 # END FORGE BUILD SEQUENCE
